@@ -1,0 +1,25 @@
+# Folders to ignore
+.vscode
+.next
+/node_modules
+/coverage
+
+# Files to ignore
+LICENSE
+README.md
+
+# Ignore configuration files
+.DS_Store
+.env
+.env.example
+.env.*.local
+.env.local
+.gitignore
+.idea
+.package-lock.json
+.prettierignore
+
+# Ignore lockfiles
+*.lock
+*.log
+yarn.lock
