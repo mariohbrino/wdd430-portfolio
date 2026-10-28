@@ -31,7 +31,7 @@ export default function ProjectCard({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-indigo-600 hover:underline"
+            className="text-indigo-800 hover:underline"
           >
             View Project
           </a>
