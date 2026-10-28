@@ -2,22 +2,22 @@ import ProjectList from "@/components/project-list";
 
 const projects = [
   {
-    title: "Project 1",
-    description: "Description for project 1",
-    technologies: ["React", "TypeScript"],
-    link: "https://example.com/project1",
+    title: "Python REST API",
+    description: "Python REST API with FastAPI",
+    technologies: ["Python", "FastAPI", "PostgreSQL"],
+    link: "https://github.com/mariohbrino/python-fastapi",
   },
   {
-    title: "Project 2",
-    description: "Description for project 2",
-    technologies: ["Next.js", "Tailwind CSS"],
-    link: "https://example.com/project2",
+    title: "Book Inventory",
+    description: "A web application to manage book inventory",
+    technologies: ["Node.js", "Express", "MongoDB", "Mongoose", "Swagger UI"],
+    link: "https://github.com/mariohbrino/book-inventory",
   },
   {
-    title: "Project 3",
-    description: "Description for project 3",
-    technologies: ["JavaScript", "CSS"],
-    link: "https://example.com/project3",
+    title: "WDD330 Pokemon Trade Card Games",
+    description: "A web-based implementation of the Pokemon Trade Card Game",
+    technologies: ["JavaScript", "HTML", "CSS", "Rest API"],
+    link: "https://github.com/mariohbrino/wdd330",
   },
 ];
 
