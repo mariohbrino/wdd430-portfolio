@@ -12,6 +12,7 @@
   "printWidth": 80,
   "plugins": [
     "prettier-plugin-organize-imports",
-    "prettier-plugin-multiline-arrays"
+    "prettier-plugin-multiline-arrays",
+    "prettier-plugin-tailwindcss"
   ]
 }
