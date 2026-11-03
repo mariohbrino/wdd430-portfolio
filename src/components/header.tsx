@@ -8,34 +8,44 @@ export default function Header() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
         <div className="text-xl font-bold text-gray-200">Mario Brino</div>
         <nav className="space-x-4">
-          <NavLink
-            href="/"
-            activeStyle="font-bold"
-            className="text-gray-200 hover:text-white"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            href="/projects"
-            activeStyle="font-bold"
-            className="text-gray-200 hover:text-white"
-          >
-            Projects
-          </NavLink>
-          <NavLink
-            href="/about"
-            activeStyle="font-bold"
-            className="text-gray-200 hover:text-white"
-          >
-            About
-          </NavLink>
-          <NavLink
-            href="/contact"
-            activeStyle="font-bold"
-            className="text-gray-200 hover:text-white"
-          >
-            Contact
-          </NavLink>
+          <ul className="flex space-x-4">
+            <li>
+              <NavLink
+                href="/"
+                activeStyle="font-bold"
+                className="text-gray-200 hover:text-white"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                href="/projects"
+                activeStyle="font-bold"
+                className="text-gray-200 hover:text-white"
+              >
+                Projects
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                href="/about"
+                activeStyle="font-bold"
+                className="text-gray-200 hover:text-white"
+              >
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                href="/contact"
+                activeStyle="font-bold"
+                className="text-gray-200 hover:text-white"
+              >
+                Contact
+              </NavLink>
+            </li>
+          </ul>
         </nav>
       </div>
     </header>
