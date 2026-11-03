@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import NavLink from "@/components/nav-link";
 
 export default function Header() {
   return (
@@ -6,18 +8,34 @@ export default function Header() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
         <div className="text-xl font-bold text-gray-200">Mario Brino</div>
         <nav className="space-x-4">
-          <Link
+          <NavLink
             href="/"
+            activeStyle="font-bold"
             className="text-gray-200 hover:text-white"
           >
             Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
+            href="/projects"
+            activeStyle="font-bold"
+            className="text-gray-200 hover:text-white"
+          >
+            Projects
+          </NavLink>
+          <NavLink
             href="/about"
+            activeStyle="font-bold"
             className="text-gray-200 hover:text-white"
           >
             About
-          </Link>
+          </NavLink>
+          <NavLink
+            href="/contact"
+            activeStyle="font-bold"
+            className="text-gray-200 hover:text-white"
+          >
+            Contact
+          </NavLink>
         </nav>
       </div>
     </header>
