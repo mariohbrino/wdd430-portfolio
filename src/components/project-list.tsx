@@ -1,11 +1,6 @@
 import ProjectCard from "@/components/project-card";
 
-interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  link?: string;
-}
+import type { Project } from "@/types/project.type";
 
 interface ProjectListProps {
   projects: Project[];

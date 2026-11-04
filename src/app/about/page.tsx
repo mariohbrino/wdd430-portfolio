@@ -1,6 +1,11 @@
 import PersonalIntroduction from "@/components/personal-introduction";
 
-const aboutContent = {
+type AboutContent = {
+  title: string;
+  content: string;
+};
+
+const aboutContent: AboutContent = {
   title: "About Me",
   content:
     "I'm a software engineer specializing in building web applications using modern technologies.",

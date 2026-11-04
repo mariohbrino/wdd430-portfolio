@@ -1,6 +1,7 @@
 import ProjectList from "@/components/project-list";
+import type { Project } from "@/types/project.type";
 
-const projects = [
+const projects: Project[] = [
   {
     title: "Python REST API",
     description: "Python REST API with FastAPI",

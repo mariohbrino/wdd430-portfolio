@@ -1,8 +1,8 @@
 export type Project = {
-  id: number;
+  id?: number;
   title: string;
   description: string;
-  type: "opensource" | "school";
+  type?: "opensource" | "school";
   technologies: string[];
   link?: string;
 };
