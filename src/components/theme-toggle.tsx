@@ -4,11 +4,11 @@ import { clsx } from "clsx";
 import { useTheme } from "next-themes";
 
 export function ThemeToggle() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className={clsx(
         "bg-background-accent rounded-md p-2 text-black transition-colors hover:rounded-md",
         "dark:text-white dark:hover:bg-gray-700 dark:hover:text-gray-200",
