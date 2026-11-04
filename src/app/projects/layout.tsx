@@ -33,14 +33,6 @@ export default function ProjectsLayout({
               School
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              href="/projects/settings"
-              activeStyle="font-bold"
-            >
-              Settings
-            </NavLink>
-          </li>
         </ul>
       </nav>
       {children}
