@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "typecheck": "npx tsc --noEmit --incremental false"
+    "pretypecheck": "next typegen",
+    "typecheck": "tsc --noEmit --incremental false"
   },
   "dependencies": {
     "clsx": "^2.1.1",
