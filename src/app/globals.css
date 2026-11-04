@@ -1,1 +1,49 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: var(--color-gray-50);
+  --foreground: var(--color-gray-800);
+  --card: var(--color-white);
+  --card-foreground: var(--color-gray-800);
+  --primary: var(--color-indigo-700);
+  --primary-foreground: var(--color-gray-200);
+  --secondary: var(--color-indigo-100);
+  --secondary-foreground: var(--color-indigo-800);
+  --background-accent: var(--color-gray-100);
+  --border: var(--color-gray-200);
+}
+
+.dark {
+  --background: var(--color-gray-950);
+  --foreground: var(--color-gray-200);
+  --card: var(--color-gray-900);
+  --card-foreground: var(--color-gray-200);
+  --primary: var(--color-indigo-300);
+  --primary-foreground: var(--color-gray-950);
+  --secondary: var(--color-indigo-200);
+  --secondary-foreground: var(--color-indigo-900);
+  --background-accent: var(--color-gray-800);
+  --border: var(--color-gray-700);
+}
+
+/* Expose the tokens as Tailwind colors: bg-background, text-foreground, bg-card, ... */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-border: var(--border);
+  --color-background-accent: var(--background-accent);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}

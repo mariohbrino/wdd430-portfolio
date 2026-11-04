@@ -6,9 +6,9 @@ export default function ProjectsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-1 flex-col bg-gray-50 text-gray-800 selection:bg-indigo-600 selection:text-gray-200">
+    <section className="flex flex-1 flex-col">
       <div className="mx-auto my-3 flex w-full max-w-7xl flex-1 flex-col md:my-28 md:flex-row">
-        <nav className="w-full shrink-0 p-6 md:w-56 md:border-r md:border-gray-200">
+        <nav className="w-full shrink-0 p-6 md:w-56 md:border-r md:border-border">
           <ul className="flex gap-3 md:flex-col">
             <li>
               <NavLink

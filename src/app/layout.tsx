@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import { ThemeProvider } from "@/providers/theme.provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,12 +25,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-screen flex-col bg-gray-50 text-gray-800 selection:bg-indigo-600 selection:text-gray-200">
-        <Header />
-        {children}
-        <Footer />
+      <body className="flex min-h-screen flex-col selection:bg-primary selection:text-primary-foreground">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

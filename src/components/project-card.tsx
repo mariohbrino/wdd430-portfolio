@@ -13,7 +13,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div className="row-span-2 grid grid-rows-subgrid gap-4">
-      <article className="flex flex-col gap-4 rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
+      <article className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-shadow duration-300 hover:shadow-md">
         <h3 className="text-xl font-semibold">{title}</h3>
         <p>{description}</p>
         {link && (
@@ -22,7 +22,7 @@ export default function ProjectCard({
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-800 hover:underline"
+              className="text-primary hover:underline"
             >
               View Project
             </a>
@@ -34,7 +34,7 @@ export default function ProjectCard({
           {technologies.map((tech) => (
             <li
               key={tech}
-              className="rounded-3xl bg-indigo-100 px-3 py-1 text-sm text-indigo-800"
+              className="rounded-3xl bg-secondary px-3 py-1 text-sm text-secondary-foreground"
             >
               {tech}
             </li>
