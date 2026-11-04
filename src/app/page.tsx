@@ -1,26 +1,5 @@
 import ProjectList from "@/components/project-list";
-import type { Project } from "@/types/project.type";
-
-const projects: Project[] = [
-  {
-    title: "Python REST API",
-    description: "Python REST API with FastAPI",
-    technologies: ["Python", "FastAPI", "PostgreSQL"],
-    link: "https://github.com/mariohbrino/python-fastapi",
-  },
-  {
-    title: "Book Inventory",
-    description: "A web application to manage book inventory",
-    technologies: ["Node.js", "Express", "MongoDB", "Mongoose", "Swagger UI"],
-    link: "https://github.com/mariohbrino/book-inventory",
-  },
-  {
-    title: "WDD330 Pokemon Trade Card Games",
-    description: "A web-based implementation of the Pokemon Trade Card Game",
-    technologies: ["JavaScript", "HTML", "CSS", "Rest API"],
-    link: "https://github.com/mariohbrino/wdd330",
-  },
-];
+import { projects } from "@/data/projects.data";
 
 export default function Home() {
   return (
