@@ -8,7 +8,7 @@ export default function ProjectsLayout({
   return (
     <section className="flex flex-1 flex-col">
       <div className="mx-auto my-3 flex w-full max-w-7xl flex-1 flex-col md:my-28 md:flex-row">
-        <nav className="w-full shrink-0 p-6 md:w-56 md:border-r md:border-border">
+        <nav className="md:border-border w-full shrink-0 p-6 md:w-56 md:border-r">
           <ul className="flex gap-3 md:flex-col">
             <li>
               <NavLink
