@@ -4,12 +4,12 @@ import type { DatabaseConfig } from "@/types/database.type";
 
 const schema = z.object({
   NODE_ENV: z.enum(["development", "production"]),
-  DATABASE_HOST: z.string().min(1),
-  DATABASE_PORT: z.coerce.number().int().min(5432).max(5599),
-  DATABASE_SCHEMA: z.string().min(1),
-  DATABASE_USERNAME: z.string().min(1),
-  DATABASE_PASSWORD: z.string().min(1),
-  DATABASE_SSLMODE: z.enum(["disable", "require"]),
+  POSTGRES_HOST: z.string().min(1),
+  POSTGRES_PORT: z.coerce.number().int().min(5432).max(5599).default(5432),
+  POSTGRES_DATABASE: z.string().min(1),
+  POSTGRES_USER: z.string().min(1),
+  POSTGRES_PASSWORD: z.string().min(1),
+  POSTGRES_SSLMODE: z.enum(["disable", "require"]),
 });
 
 export const loadDatabaseConfig = (): DatabaseConfig => {
@@ -20,12 +20,12 @@ export const loadDatabaseConfig = (): DatabaseConfig => {
   }
 
   return {
-    host: data.DATABASE_HOST,
-    port: data.DATABASE_PORT,
-    database: data.DATABASE_SCHEMA,
-    username: data.DATABASE_USERNAME,
-    password: data.DATABASE_PASSWORD,
-    sslMode: data.DATABASE_SSLMODE === "require",
+    host: data.POSTGRES_HOST,
+    port: data.POSTGRES_PORT,
+    database: data.POSTGRES_DATABASE,
+    username: data.POSTGRES_USER,
+    password: data.POSTGRES_PASSWORD,
+    sslMode: data.POSTGRES_SSLMODE === "require",
     isDevelopment: data.NODE_ENV === "development",
   };
 };
