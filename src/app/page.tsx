@@ -1,7 +1,17 @@
 import ProjectList from "@/components/project-list";
-import { projects } from "@/data/projects.data";
+import type { Project } from "@/types/project.type";
+import { getBaseUrl } from "@/utils/base-url.util";
 
-export default function Home() {
+export default async function Home() {
+  const endpointUrl: string = `${await getBaseUrl()}/api/projects`;
+
+  const response = await fetch(endpointUrl);
+  let projects: Project[] = [];
+
+  if (response.ok) {
+    projects = await response.json();
+  }
+
   return (
     <main className="mx-auto w-full max-w-7xl grow p-6">
       <h1 className="mb-4 text-3xl font-bold">My Portfolio</h1>
