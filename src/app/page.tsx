@@ -1,20 +1,20 @@
 import { Suspense } from "react";
 
 import ProjectList from "@/components/project-list";
-import type { Project } from "@/types/project.type";
+import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
 
 const ListProjects = async () => {
   const endpointUrl: string = `${await getBaseUrl()}/api/projects`;
 
   const response = await fetch(endpointUrl);
-  let projects: Project[] = [];
+  let projects: ProjectResponse = { data: [], total: 0, totalPages: 0 };
 
   if (response.ok) {
     projects = await response.json();
   }
 
-  return <ProjectList projects={projects} />;
+  return <ProjectList projects={projects.data} />;
 };
 
 export default async function Home() {

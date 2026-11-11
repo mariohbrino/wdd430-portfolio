@@ -1,26 +1,22 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 
 import { getAllProjects } from "@/modals/projects.modal";
-import type { ProjectType } from "@/types/project.type";
-
-const projectTypes = ["opensource", "school"] as const;
-const projectTypeSchema = z.enum(projectTypes);
+import { projectSchema } from "@/validations/project.validate";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const type = searchParams.get("type") as ProjectType;
 
-  const typeValidation = projectTypeSchema.safeParse(type);
+  const validated = projectSchema.safeParse(Object.fromEntries(searchParams));
 
-  if (type && !typeValidation.success) {
+  if (!validated.success) {
     return NextResponse.json(
-      { error: "Invalid project type" },
+      { error: "Invalid request parameters", errors: validated.error.issues },
       { status: 400 },
     );
   }
 
-  const projects = await getAllProjects(type);
+  const { type, page, query, limit } = validated.data;
+  const projects = await getAllProjects(type, page, query, limit);
 
   return NextResponse.json(projects);
 }
