@@ -31,9 +31,9 @@ export default function ProjectCard({
       </article>
       <div className="px-6">
         <ul className="flex flex-wrap gap-2">
-          {technologies.map((tech) => (
+          {technologies.map((tech, index) => (
             <li
-              key={tech}
+              key={index}
               className="bg-secondary text-secondary-foreground rounded-3xl px-3 py-1 text-sm"
             >
               {tech}

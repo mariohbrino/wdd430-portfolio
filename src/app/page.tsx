@@ -1,7 +1,23 @@
-import ProjectList from "@/components/project-list";
-import { projects } from "@/data/projects.data";
+import { Suspense } from "react";
 
-export default function Home() {
+import ProjectList from "@/components/project-list";
+import type { ProjectResponse } from "@/types/project.type";
+import { getBaseUrl } from "@/utils/base-url.util";
+
+const ListProjects = async () => {
+  const endpointUrl: string = `${await getBaseUrl()}/api/projects`;
+
+  const response = await fetch(endpointUrl);
+  let projects: ProjectResponse = { data: [], total: 0, totalPages: 0 };
+
+  if (response.ok) {
+    projects = await response.json();
+  }
+
+  return <ProjectList projects={projects.data} />;
+};
+
+export default async function Home() {
   return (
     <main className="mx-auto w-full max-w-7xl grow p-6">
       <h1 className="mb-4 text-3xl font-bold">My Portfolio</h1>
@@ -12,7 +28,9 @@ export default function Home() {
           using modern technologies.
         </p>
       </section>
-      <ProjectList projects={projects} />
+      <Suspense fallback={<p>Loading projects...</p>}>
+        <ListProjects />
+      </Suspense>
     </main>
   );
 }
