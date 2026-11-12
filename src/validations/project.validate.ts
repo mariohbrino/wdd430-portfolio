@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import type { ProjectType } from "@/types/project.type";
 
-export const PROJECT_LIMITS: number[] = [5, 10, 15];
+export const PROJECT_LIMITS: number[] = [1, 5, 10, 15];
 export const DEFAULT_PROJECT_LIMIT = 5;
 
 const projectTypes: ProjectType[] = ["opensource", "school"];

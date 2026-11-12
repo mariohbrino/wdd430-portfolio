@@ -25,7 +25,7 @@ const PaginationLink = ({
   return value !== null ? (
     <Link
       href={href}
-      className="bg-secondary border-border text-secondary-foreground hover:bg-primary/90 text- block rounded-md border-2 px-2 py-1 text-sm"
+      className="bg-secondary border-border text-secondary-foreground hover:bg-primary/90 hover:text-primary-foreground block rounded-md border-2 px-2 py-1 text-sm"
     >
       {children}
     </Link>
@@ -66,9 +66,9 @@ export default function Pagination({
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <div className="align-center flex w-full flex-col justify-between gap-4 px-6 md:flex-row">
+      <div className="align-center flex w-full flex-col items-center justify-between gap-4 px-6 md:flex-row">
         <p className="text-sm">
-          Showing {totalItems} of {totalRecords} projects
+          Showing {totalItems} of {totalRecords} records.
         </p>
         <div>
           <label
@@ -79,7 +79,7 @@ export default function Pagination({
           </label>
           <select
             id="perPage"
-            className="bg-secondary border-border text-secondary-foreground hover:bg-primary/90 ml-2 rounded-md border-2 px-2 py-1 text-sm"
+            className="bg-secondary border-border text-secondary-foreground hover:bg-primary/90 hover:text-primary-foreground ml-2 rounded-md border-2 px-2 py-1 text-sm"
             value={searchParams.get("limit") ?? DEFAULT_PROJECT_LIMIT}
             onChange={handlePerPageChange}
           >
@@ -94,7 +94,7 @@ export default function Pagination({
           </select>
         </div>
       </div>
-      <div className="flex w-full flex-col px-6 md:items-center">
+      <div className="flex w-full flex-col items-center px-6">
         <nav aria-label="Table Pagination">
           <ul className="flex gap-4">
             <li>
