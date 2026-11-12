@@ -17,6 +17,7 @@ export function ProjectSearch() {
     } else {
       params.delete("query");
       params.delete("page");
+      params.delete("limit");
     }
 
     replace(`${pathname}?${params.toString()}`);
