@@ -10,7 +10,11 @@ import {
 
 import * as tables from "@/database/schema";
 import { database } from "@/services/database.service";
-import type { Project, ProjectType } from "@/types/project.type";
+import type {
+  Project,
+  ProjectResponse,
+  ProjectType,
+} from "@/types/project.type";
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 10;
@@ -20,7 +24,7 @@ export const getAllProjects = async (
   page = DEFAULT_PAGE,
   query?: string,
   limit = DEFAULT_PAGE_SIZE,
-): Promise<{ data: Project[]; total: number; totalPages: number }> => {
+): Promise<ProjectResponse> => {
   const offset = (page - 1) * limit;
 
   const conditions = [];
@@ -59,6 +63,8 @@ export const getAllProjects = async (
   return {
     data,
     total,
+    previousPage: page > 1 ? page - 1 : null,
+    nextPage: page < Math.ceil(total / limit) ? page + 1 : null,
     totalPages: Math.ceil(total / limit),
   };
 };

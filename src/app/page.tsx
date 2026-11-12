@@ -5,10 +5,16 @@ import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
 
 const ListProjects = async () => {
-  const endpointUrl: string = `${await getBaseUrl()}/api/projects`;
+  const endpointUrl: string = `${await getBaseUrl()}/api/projects?limit=5`;
 
   const response = await fetch(endpointUrl);
-  let projects: ProjectResponse = { data: [], total: 0, totalPages: 0 };
+  let projects: ProjectResponse = {
+    data: [],
+    total: 0,
+    totalPages: 0,
+    previousPage: null,
+    nextPage: null,
+  };
 
   if (response.ok) {
     projects = await response.json();
