@@ -1,13 +1,14 @@
 import { Suspense } from "react";
 
+import Pagination from "@/components/pagination";
 import ProjectList from "@/components/project-list";
 import { ProjectSearch } from "@/components/project-search";
 import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
-import { projectSchema } from "@/validations/project.validate";
+import { PROJECT_LIMITS, projectSchema } from "@/validations/project.validate";
 
 interface PageProps {
-  searchParams: Promise<{ page?: string; query?: string }>;
+  searchParams: Promise<{ page?: string; query?: string; limit?: string }>;
 }
 
 const ListProjects = async ({ searchParams }: PageProps) => {
@@ -16,7 +17,7 @@ const ListProjects = async ({ searchParams }: PageProps) => {
   const endpointWithParams = new URL(`${await getBaseUrl()}/api/projects`);
 
   if (validated.success) {
-    const { page, query } = validated.data;
+    const { page, query, limit } = validated.data;
 
     if (page) {
       endpointWithParams.searchParams.set("page", page.toString());
@@ -25,16 +26,37 @@ const ListProjects = async ({ searchParams }: PageProps) => {
     if (query) {
       endpointWithParams.searchParams.set("query", query);
     }
+
+    if (limit) {
+      endpointWithParams.searchParams.set("limit", limit.toString());
+    }
   }
 
   const response = await fetch(endpointWithParams);
-  let projects: ProjectResponse = { data: [], total: 0, totalPages: 0 };
+  let projects: ProjectResponse = {
+    data: [],
+    total: 0,
+    totalPages: 0,
+    previousPage: null,
+    nextPage: null,
+  };
 
   if (response.ok) {
     projects = await response.json();
   }
 
-  return <ProjectList projects={projects.data} />;
+  return (
+    <div className="flex w-full flex-col gap-4">
+      <ProjectList projects={projects.data} />
+      <Pagination
+        perPage={PROJECT_LIMITS}
+        previousPage={projects.previousPage}
+        nextPage={projects.nextPage}
+        totalItems={projects.data.length}
+        totalRecords={projects.total}
+      />
+    </div>
+  );
 };
 
 export default async function ProjectPage({ searchParams }: PageProps) {

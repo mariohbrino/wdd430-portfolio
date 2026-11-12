@@ -1,14 +1,20 @@
+import Pagination from "@/components/pagination";
 import ProjectList from "@/components/project-list";
 import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
+import { PROJECT_LIMITS } from "@/validations/project.validate";
 
 export default async function OpenSourcePage() {
-  await new Promise((res) => setTimeout(res, 2000));
-
   const endpointUrl: string = `${await getBaseUrl()}/api/projects?type=opensource`;
 
   const response = await fetch(endpointUrl);
-  let projects: ProjectResponse = { data: [], total: 0, totalPages: 0 };
+  let projects: ProjectResponse = {
+    data: [],
+    total: 0,
+    totalPages: 0,
+    previousPage: null,
+    nextPage: null,
+  };
 
   if (response.ok) {
     projects = (await response.json()) as ProjectResponse;
@@ -17,7 +23,16 @@ export default async function OpenSourcePage() {
   return (
     <div className="mx-auto w-full max-w-7xl grow px-6 md:p-6">
       <h1 className="mb-4 text-3xl font-bold">Open Source Projects</h1>
-      <ProjectList projects={projects.data} />
+      <div className="flex w-full flex-col gap-4">
+        <ProjectList projects={projects.data} />
+        <Pagination
+          perPage={PROJECT_LIMITS}
+          previousPage={projects.previousPage}
+          nextPage={projects.nextPage}
+          totalItems={projects.data.length}
+          totalRecords={projects.total}
+        />
+      </div>
     </div>
   );
 }

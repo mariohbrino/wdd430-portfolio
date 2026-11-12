@@ -2,8 +2,10 @@ import { z } from "zod";
 
 import type { ProjectType } from "@/types/project.type";
 
+export const PROJECT_LIMITS: number[] = [1, 5, 10, 15];
+export const DEFAULT_PROJECT_LIMIT = 5;
+
 const projectTypes: ProjectType[] = ["opensource", "school"];
-const projectLimits: number[] = [5, 10, 15];
 
 export const projectSchema = z.object({
   type: z.enum(projectTypes).optional(),
@@ -15,8 +17,8 @@ export const projectSchema = z.object({
   query: z.string({ error: "Invalid term search page parameter" }).default(""),
   limit: z.coerce
     .number({ error: "Invalid limit parameter" })
-    .refine((value) => projectLimits.some((limit) => limit === value), {
-      message: `Limit must be one of the following values: ${projectLimits.join(", ")}`,
+    .refine((value) => PROJECT_LIMITS.some((limit) => limit === value), {
+      message: `Limit must be one of the following values: ${PROJECT_LIMITS.join(", ")}`,
     })
-    .default(10),
+    .default(DEFAULT_PROJECT_LIMIT),
 });
