@@ -9,6 +9,16 @@ import type { Project, ProjectState } from "@/types/project.type";
 
 const initialState: ProjectState = {};
 
+const convertToString = (raw: unknown) => {
+  if (Array.isArray(raw)) {
+    return raw.join(", ");
+  }
+  if (raw == null) {
+    return "";
+  }
+  return String(raw);
+};
+
 export default function ProjectEditForm({ project }: { project: Project }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction, pending] = useActionState(
@@ -24,12 +34,13 @@ export default function ProjectEditForm({ project }: { project: Project }) {
     for (const field of [
       "title",
       "description",
+      "yearCompleted",
       "link",
       "technologies",
     ] as const) {
       const input = form.elements.namedItem(field);
       const raw = project[field];
-      const value = Array.isArray(raw) ? raw.join(", ") : raw;
+      const value = convertToString(raw);
       if (
         (input instanceof HTMLInputElement ||
           input instanceof HTMLTextAreaElement) &&
@@ -64,6 +75,12 @@ export default function ProjectEditForm({ project }: { project: Project }) {
         state={state}
         placeholder="Enter the project description"
         field="description"
+      />
+      <Field
+        state={state}
+        placeholder="Enter the year the project was completed"
+        field="yearCompleted"
+        type="number"
       />
       <Field
         state={state}

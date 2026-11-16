@@ -2,6 +2,7 @@ import { ProjectType } from "@/types/project.type";
 import { sql } from "drizzle-orm";
 import {
   check,
+  integer,
   pgTable,
   serial,
   text,
@@ -16,6 +17,7 @@ export const projects = pgTable(
     title: varchar({ length: 255 }).notNull(),
     description: text("description").notNull().default(""),
     type: varchar({ length: 20 }).$type<ProjectType>().notNull(),
+    yearCompleted: integer("year_completed").notNull().default(2026),
     technologies: text().array().notNull().default([]),
     link: varchar({ length: 500 }).notNull(),
     createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),

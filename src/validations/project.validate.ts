@@ -30,6 +30,10 @@ export const projectSchema = z.object({
     .min(1, { message: "Title is required" })
     .max(255, { message: "Title must be at most 255 characters" }),
   description: z.string().min(1, { message: "Description is required" }),
+  yearCompleted: z.coerce
+    .number({ error: "Year completed must be a valid number" })
+    .int({ message: "Year completed must be an integer" })
+    .min(2010, { message: "Year completed must be at least 2010" }),
   link: z
     .string()
     .min(1, { message: "Link is required" })

@@ -13,7 +13,7 @@ export type ProjectResponse = {
 };
 
 export type ProjectField =
-  "type" | "title" | "description" | "link" | "technologies";
+  "type" | "title" | "description" | "yearCompleted" | "link" | "technologies";
 
 export type ProjectState = {
   values?: Partial<Record<ProjectField, string>>;

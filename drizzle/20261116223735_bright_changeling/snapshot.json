@@ -1,0 +1,126 @@
+{
+  "type": "diff",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "bb0bdf07-9946-47dd-8be2-c6be4680eefc",
+  "prevIds": [
+    "039d5b16-de0a-4545-9bd8-d869dc3d8b6d"
+  ],
+  "footprints": [
+    {
+      "statementType": "add_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "projects",
+        "year_completed"
+      ],
+      "writes": [
+        "s|col|public.projects.year_completed",
+        "n|col|public.projects.year_completed",
+        "e|col|public.projects.year_completed"
+      ],
+      "reads": [
+        "n|tbl|public.projects",
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "alter_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "projects",
+        "description"
+      ],
+      "writes": [
+        "s|colprop|public.projects.description.notNull",
+        "s|colprop|public.projects.description.default"
+      ],
+      "reads": [
+        "n|tbl|public.projects",
+        "n|sch|public",
+        "n|col|public.projects.description"
+      ],
+      "sqlHash": "598b2cb75b790c64"
+    },
+    {
+      "statementType": "alter_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "projects",
+        "technologies"
+      ],
+      "writes": [
+        "s|colprop|public.projects.technologies.notNull",
+        "s|colprop|public.projects.technologies.default"
+      ],
+      "reads": [
+        "n|tbl|public.projects",
+        "n|sch|public",
+        "n|col|public.projects.technologies"
+      ],
+      "sqlHash": "bd4bb040b3c61cb4"
+    },
+    {
+      "statementType": "alter_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "projects",
+        "updated_at"
+      ],
+      "writes": [
+        "s|colprop|public.projects.updated_at.notNull"
+      ],
+      "reads": [
+        "n|tbl|public.projects",
+        "n|sch|public",
+        "n|col|public.projects.updated_at"
+      ],
+      "sqlHash": "7eea285e902fa643"
+    }
+  ],
+  "deltas": [
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "projects",
+        "name": "year_completed",
+        "type": "integer",
+        "typeSchema": null,
+        "notNull": true,
+        "dimensions": 0,
+        "default": "2026",
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    },
+    {
+      "op": "alter",
+      "key": "columns\u0000[\"public\",\"projects\",\"description\"]",
+      "set": {
+        "notNull": true,
+        "default": "''"
+      }
+    },
+    {
+      "op": "alter",
+      "key": "columns\u0000[\"public\",\"projects\",\"technologies\"]",
+      "set": {
+        "notNull": true,
+        "default": "'{}'"
+      }
+    },
+    {
+      "op": "alter",
+      "key": "columns\u0000[\"public\",\"projects\",\"updated_at\"]",
+      "set": {
+        "notNull": true
+      }
+    }
+  ]
+}

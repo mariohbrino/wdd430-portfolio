@@ -37,6 +37,12 @@ export default function ProjectCreateForm() {
       />
       <Field
         state={state}
+        placeholder="Enter the year the project was completed"
+        field="yearCompleted"
+        type="number"
+      />
+      <Field
+        state={state}
         placeholder="Enter the project link"
         field="link"
         type="url"

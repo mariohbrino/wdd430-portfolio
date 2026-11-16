@@ -22,6 +22,7 @@ export async function create(
     type: formData.get("type")?.toString() ?? "",
     title: formData.get("title")?.toString() ?? "",
     description: formData.get("description")?.toString() ?? "",
+    yearCompleted: formData.get("yearCompleted")?.toString() ?? "",
     link: formData.get("link")?.toString() ?? "",
     technologies: formData.get("technologies")?.toString() ?? "",
   };
@@ -56,6 +57,7 @@ export async function update(
     type: formData.get("type")?.toString() ?? "",
     title: formData.get("title")?.toString() ?? "",
     description: formData.get("description")?.toString() ?? "",
+    yearCompleted: formData.get("yearCompleted")?.toString() ?? "",
     link: formData.get("link")?.toString() ?? "",
     technologies: formData.get("technologies")?.toString() ?? "",
   };

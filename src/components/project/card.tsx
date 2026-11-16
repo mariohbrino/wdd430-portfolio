@@ -5,6 +5,7 @@ interface ProjectCardProps {
   id: number;
   title: string;
   description: string;
+  yearCompleted: number;
   technologies: string[];
   link?: string;
   actions?: boolean;
@@ -14,6 +15,7 @@ export default function ProjectCard({
   id,
   title,
   description,
+  yearCompleted,
   technologies,
   link,
   actions = false,
@@ -23,6 +25,7 @@ export default function ProjectCard({
       <article className="border-border bg-card text-card-foreground flex flex-col gap-4 rounded-lg border p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
         <h2 className="text-xl font-semibold">{title}</h2>
         <p className="grow">{description}</p>
+        <p className="mt-auto">Completed: {yearCompleted}</p>
         <div className="flex flex-row items-center justify-between gap-4">
           {link && (
             <p className="mt-auto">

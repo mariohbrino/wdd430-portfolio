@@ -35,6 +35,7 @@ export const getProjects = async (
       or(
         ilike(tables.projects.title, `%${query}%`),
         ilike(tables.projects.description, `%${query}%`),
+        ilike(tables.projects.yearCompleted, `%${query}%`),
         arrayOverlaps(tables.projects.technologies, [query]),
       ),
     );
