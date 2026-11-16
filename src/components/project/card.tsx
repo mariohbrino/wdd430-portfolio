@@ -21,7 +21,7 @@ export default function ProjectCard({
   return (
     <div className="row-span-2 grid grid-rows-subgrid gap-4">
       <article className="border-border bg-card text-card-foreground flex flex-col gap-4 rounded-lg border p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
-        <h3 className="text-xl font-semibold">{title}</h3>
+        <h2 className="text-xl font-semibold">{title}</h2>
         <p className="grow">{description}</p>
         <div className="flex flex-row items-center justify-between gap-4">
           {link && (
