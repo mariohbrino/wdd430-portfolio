@@ -80,9 +80,33 @@ export default function ProjectEditForm({ project }: { project: Project }) {
       <button
         type="submit"
         disabled={pending}
-        className="bg-primary text-primary-foreground self-start rounded-md px-5 py-2 font-medium transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        className="bg-primary text-primary-foreground flex items-center gap-2 self-start rounded-md px-5 py-2 font-medium transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {pending ? "Saving..." : "Update Project"}
+        <span aria-label="submit-label">Update Project</span>
+        {pending && (
+          <svg
+            aria-label="Loading"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-loader preview-icon animate-spin [animation-duration:2s]"
+          >
+            <path d="M12 2v4" />
+            <path d="m16.2 7.8 2.9-2.9" />
+            <path d="M18 12h4" />
+            <path d="m16.2 16.2 2.9 2.9" />
+            <path d="M12 18v4" />
+            <path d="m4.9 19.1 2.9-2.9" />
+            <path d="M2 12h4" />
+            <path d="m4.9 4.9 2.9 2.9" />
+          </svg>
+        )}
       </button>
 
       {state.message && (
