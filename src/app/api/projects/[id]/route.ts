@@ -1,10 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 
-import { getProjectById } from "@/modals/projects.modal";
-import { database } from "@/services/database.service";
-
-const projectIdSchema = z.number().int().positive();
+import { projectIdSchema } from "@/validations/project-id.validate";
 
 type ProjectProps = {
   params: Promise<{ id: string }>;
@@ -12,17 +8,30 @@ type ProjectProps = {
 
 export async function GET(request: NextRequest, { params }: ProjectProps) {
   void request;
-  const id = Number((await params).id);
 
-  if (!projectIdSchema.safeParse(id).success) {
-    return NextResponse.json({ error: "Invalid project ID" }, { status: 400 });
+  try {
+    const { id } = await params;
+    const validated = await projectIdSchema.safeParseAsync(id);
+
+    if (!validated.success) {
+      const notFound = validated.error.issues.some(
+        (issue) => issue.code === "custom" && issue.params?.notFound === true,
+      );
+
+      return NextResponse.json(
+        { error: notFound ? "Project not found" : "Invalid project ID" },
+        { status: notFound ? 404 : 400 },
+      );
+    }
+
+    const project = validated.data;
+
+    return NextResponse.json(project);
+  } catch (error) {
+    console.log("Error occurred while fetching project by ID", error);
+    return NextResponse.json(
+      { error: "Failed to fetch project by ID" },
+      { status: 500 },
+    );
   }
-
-  const project = await getProjectById(database, id);
-
-  if (!project) {
-    return NextResponse.json({ error: "Project not found" }, { status: 404 });
-  }
-
-  return NextResponse.json(project);
 }

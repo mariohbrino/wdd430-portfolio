@@ -19,7 +19,15 @@ export async function GET(request: NextRequest) {
   }
 
   const { type, page, query, limit } = validated.data;
-  const projects = await getProjects(database, type, page, query, limit);
 
-  return NextResponse.json(projects);
+  try {
+    const projects = await getProjects(database, type, page, query, limit);
+    return NextResponse.json(projects);
+  } catch (error) {
+    console.log("Error occurred while fetching projects", error);
+    return NextResponse.json(
+      { error: "Failed to fetch projects" },
+      { status: 500 },
+    );
+  }
 }

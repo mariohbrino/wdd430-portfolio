@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import {
   createProject,
-  deleteProjectById,
+  removeProjectById,
   updateProjectById,
 } from "@/modals/projects.modal";
 import { database } from "@/services/database.service";
@@ -38,12 +38,9 @@ export async function create(
 
   try {
     await createProject(database, validated.data);
-  } catch {
-    return {
-      message:
-        "Something went wrong while saving the project. Please try again.",
-      values,
-    };
+  } catch (error) {
+    console.log("Error occurred while creating project", error);
+    throw new Error("Failed to create project");
   }
 
   revalidatePath("/projects");
@@ -66,7 +63,7 @@ export async function update(
   const validatedId = await projectIdSchema.safeParseAsync(projectId);
   if (!validatedId.success) {
     return {
-      message: "Invalid project ID or project not found",
+      message: "Invalid project ID",
       values,
     };
   }
@@ -82,12 +79,9 @@ export async function update(
 
   try {
     await updateProjectById(database, validatedId.data.id, validated.data);
-  } catch {
-    return {
-      message:
-        "Something went wrong while updating the project. Please try again.",
-      values,
-    };
+  } catch (error) {
+    console.log("Error occurred while updating project", error);
+    throw new Error("Failed to update project");
   }
 
   revalidatePath("/projects");
@@ -100,8 +94,12 @@ export async function remove(projectId: number): Promise<void> {
     throw new Error("Invalid project ID");
   }
 
-  const project = validated.data;
-  await deleteProjectById(database, project.id);
+  try {
+    await removeProjectById(database, validated.data.id);
+  } catch (error) {
+    console.log("Error occurred while deleting project", error);
+    throw new Error("Failed to delete project");
+  }
 
   revalidatePath("/projects");
   redirect("/projects");

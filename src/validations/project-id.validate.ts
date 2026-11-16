@@ -15,6 +15,7 @@ export const projectIdSchema = z.coerce
       ctx.addIssue({
         code: "custom",
         message: "Project not found",
+        params: { notFound: true },
       });
       return z.NEVER;
     }

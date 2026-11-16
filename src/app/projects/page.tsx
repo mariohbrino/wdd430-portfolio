@@ -72,7 +72,7 @@ export default async function ProjectPage({ searchParams }: PageProps) {
       <div className="flex items-center justify-between">
         <h1 className="mb-4 text-3xl font-bold">Projects Overview</h1>
         <Link
-          className="bg-primary hover:bg-primary/80 text-secondary-foreground rounded px-4 py-2"
+          className="bg-primary hover:bg-primary/80 text-secondary-foreground rounded-md px-4 py-2"
           href="/projects/create"
         >
           Create Project

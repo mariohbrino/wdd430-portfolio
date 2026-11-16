@@ -25,7 +25,7 @@ export function ProjectSearch() {
 
   return (
     <input
-      className="mb-4 rounded border border-gray-300 p-2"
+      className="mb-4 rounded-md border border-gray-300 p-2"
       type="search"
       placeholder="Search projects..."
       defaultValue={searchParams.get("query")?.toString()}

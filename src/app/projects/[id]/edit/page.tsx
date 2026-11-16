@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import ProjectEditForm from "@/components/project/edit-form";
 import { getBaseUrl } from "@/utils/base-url.util";
 
@@ -13,9 +15,7 @@ export default async function EditProjectPage({
   const response = await fetch(endpointUrl);
 
   if (!response.ok) {
-    if (response.status === 404) {
-      return <p>Project not found</p>;
-    }
+    notFound();
   }
 
   const project = await response.json();
