@@ -1,4 +1,4 @@
-import ProjectEditForm from "@/components/project-edit-form";
+import ProjectEditForm from "@/components/project/edit-form";
 import { getBaseUrl } from "@/utils/base-url.util";
 
 type EditProjectPageProps = {

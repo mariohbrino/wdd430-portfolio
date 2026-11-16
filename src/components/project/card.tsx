@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ProjectRemoveButton } from "./project-remove-button";
+import { ProjectRemoveButton } from "./remove-button";
 
 interface ProjectEditButtonProps {
   id: number;

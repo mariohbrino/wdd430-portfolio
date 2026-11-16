@@ -1,5 +1,5 @@
 import Pagination from "@/components/pagination";
-import ProjectList from "@/components/project-list";
+import ProjectList from "@/components/project/list";
 import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
 import { PROJECT_LIMITS } from "@/validations/project.validate";

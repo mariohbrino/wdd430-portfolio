@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import Pagination from "@/components/pagination";
-import ProjectList from "@/components/project-list";
-import { ProjectSearch } from "@/components/project-search";
+import ProjectList from "@/components/project/list";
+import { ProjectSearch } from "@/components/project/search";
 import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
 import {

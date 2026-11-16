@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import ProjectList from "@/components/project-list";
+import ProjectList from "@/components/project/list";
 import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
 
