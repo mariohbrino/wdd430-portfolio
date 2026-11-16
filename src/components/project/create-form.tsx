@@ -29,28 +29,33 @@ export default function ProjectCreateForm() {
         state={state}
         placeholder="Enter the project title"
         field="title"
+        title="Project Title"
       />
       <Field
         state={state}
         placeholder="Enter the project description"
         field="description"
+        title="Project Description"
       />
       <Field
         state={state}
         placeholder="Enter the year the project was completed"
         field="yearCompleted"
         type="number"
+        title="Year Completed"
       />
       <Field
         state={state}
         placeholder="Enter the project link"
         field="link"
         type="url"
+        title="Project Link"
       />
       <Field
         state={state}
         placeholder="Enter the technologies used"
         field="technologies"
+        title="Technologies Used"
       />
 
       <button

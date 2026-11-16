@@ -5,11 +5,13 @@ const Field = ({
   state,
   placeholder,
   field,
+  title,
   type,
 }: {
   state: ProjectState;
   placeholder?: string;
   field: keyof NonNullable<ProjectState["errors"]>;
+  title?: string;
   type?: string;
 }) => {
   return (
@@ -18,7 +20,7 @@ const Field = ({
         htmlFor={field}
         className="text-sm font-medium"
       >
-        {field.charAt(0).toUpperCase() + field.slice(1)}
+        {title}
       </label>
       <input
         id={field}
