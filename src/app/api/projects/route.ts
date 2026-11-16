@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { getAllProjects } from "@/modals/projects.modal";
+import { getProjects } from "@/modals/projects.modal";
+import { database } from "@/services/database.service";
 import { projectQuerySchema } from "@/validations/project.validate";
 
 export async function GET(request: NextRequest) {
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest) {
   }
 
   const { type, page, query, limit } = validated.data;
-  const projects = await getAllProjects(type, page, query, limit);
+  const projects = await getProjects(database, type, page, query, limit);
 
   return NextResponse.json(projects);
 }

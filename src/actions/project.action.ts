@@ -9,6 +9,7 @@ import {
   deleteProjectById,
   updateProjectById,
 } from "@/modals/projects.modal";
+import { database } from "@/services/database.service";
 import type { ProjectState } from "@/types/project.type";
 import { projectIdSchema } from "@/validations/project-id.validate";
 import { projectSchema } from "@/validations/project.validate";
@@ -36,7 +37,7 @@ export async function create(
   }
 
   try {
-    await createProject(validated.data);
+    await createProject(database, validated.data);
   } catch {
     return {
       message:
@@ -80,7 +81,7 @@ export async function update(
   }
 
   try {
-    await updateProjectById(validatedId.data.id, validated.data);
+    await updateProjectById(database, validatedId.data.id, validated.data);
   } catch {
     return {
       message:
@@ -100,7 +101,7 @@ export async function remove(projectId: number): Promise<void> {
   }
 
   const project = validated.data;
-  await deleteProjectById(project.id);
+  await deleteProjectById(database, project.id);
 
   revalidatePath("/projects");
   redirect("/projects");

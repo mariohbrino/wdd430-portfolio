@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { getProjectById } from "@/modals/projects.modal";
+import { database } from "@/services/database.service";
 
 const projectIdSchema = z.number().int().positive();
 
@@ -17,7 +18,7 @@ export async function GET(request: NextRequest, { params }: ProjectProps) {
     return NextResponse.json({ error: "Invalid project ID" }, { status: 400 });
   }
 
-  const project = await getProjectById(id);
+  const project = await getProjectById(database, id);
 
   if (!project) {
     return NextResponse.json({ error: "Project not found" }, { status: 404 });

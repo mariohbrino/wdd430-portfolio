@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm";
 
 import * as tables from "@/database/schema";
-import { database } from "@/services/database.service";
+import type { Database } from "@/types/database.type";
 import type {
   Project,
   ProjectResponse,
@@ -19,7 +19,8 @@ import type {
 const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 10;
 
-export const getAllProjects = async (
+export const getProjects = async (
+  db: Database,
   type?: ProjectType,
   page = DEFAULT_PAGE,
   query?: string,
@@ -43,7 +44,7 @@ export const getAllProjects = async (
     conditions.push(eq(tables.projects.type, type));
   }
 
-  const rows = await database()
+  const rows = await db()
     .select({
       ...getTableColumns(tables.projects),
       total: sql<number>`count(*) over()`.mapWith(Number),
@@ -70,9 +71,10 @@ export const getAllProjects = async (
 };
 
 export const getProjectById = async (
+  db: Database,
   id: number,
 ): Promise<Project | undefined> => {
-  const result = await database()
+  const result = await db()
     .select({
       ...getTableColumns(tables.projects),
     })
@@ -82,9 +84,10 @@ export const getProjectById = async (
 };
 
 export const createProject = async (
+  db: Database,
   project: Omit<Project, "id" | "createdAt" | "updatedAt">,
 ): Promise<Project> => {
-  const result = await database()
+  const result = await db()
     .insert(tables.projects)
     .values(project)
     .returning({
@@ -94,10 +97,11 @@ export const createProject = async (
 };
 
 export const updateProjectById = async (
+  db: Database,
   id: number,
   project: Omit<Project, "id" | "createdAt" | "updatedAt">,
 ): Promise<Project | undefined> => {
-  const result = await database()
+  const result = await db()
     .update(tables.projects)
     .set({
       ...project,
@@ -110,8 +114,11 @@ export const updateProjectById = async (
   return result[0] ? result[0] : undefined;
 };
 
-export const deleteProjectById = async (id: number): Promise<boolean> => {
-  const result = await database()
+export const deleteProjectById = async (
+  db: Database,
+  id: number,
+): Promise<boolean> => {
+  const result = await db()
     .delete(tables.projects)
     .where(eq(tables.projects.id, id));
   return (result.rowCount ?? 0) > 0;
