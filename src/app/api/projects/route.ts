@@ -1,12 +1,14 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { getAllProjects } from "@/modals/projects.modal";
-import { projectSchema } from "@/validations/project.validate";
+import { projectQuerySchema } from "@/validations/project.validate";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
-  const validated = projectSchema.safeParse(Object.fromEntries(searchParams));
+  const validated = projectQuerySchema.safeParse(
+    Object.fromEntries(searchParams),
+  );
 
   if (!validated.success) {
     return NextResponse.json(

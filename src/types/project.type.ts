@@ -11,3 +11,14 @@ export type ProjectResponse = {
   total: number;
   totalPages: number;
 };
+
+export type ProjectField =
+  "type" | "title" | "description" | "link" | "technologies";
+
+export type ProjectState = {
+  values?: Partial<Record<ProjectField, string>>;
+  message?: string;
+  errors?: Partial<Record<ProjectField, string[]>>;
+};
+
+export type RemoveState = { error?: string };

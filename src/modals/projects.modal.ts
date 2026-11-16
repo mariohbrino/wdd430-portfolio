@@ -73,8 +73,46 @@ export const getProjectById = async (
   id: number,
 ): Promise<Project | undefined> => {
   const result = await database()
-    .select()
+    .select({
+      ...getTableColumns(tables.projects),
+    })
     .from(tables.projects)
     .where(eq(tables.projects.id, id));
   return result[0] ? result[0] : undefined;
+};
+
+export const createProject = async (
+  project: Omit<Project, "id" | "createdAt" | "updatedAt">,
+): Promise<Project> => {
+  const result = await database()
+    .insert(tables.projects)
+    .values(project)
+    .returning({
+      ...getTableColumns(tables.projects),
+    });
+  return result[0];
+};
+
+export const updateProjectById = async (
+  id: number,
+  project: Omit<Project, "id" | "createdAt" | "updatedAt">,
+): Promise<Project | undefined> => {
+  const result = await database()
+    .update(tables.projects)
+    .set({
+      ...project,
+      updatedAt: new Date(),
+    })
+    .where(eq(tables.projects.id, id))
+    .returning({
+      ...getTableColumns(tables.projects),
+    });
+  return result[0] ? result[0] : undefined;
+};
+
+export const deleteProjectById = async (id: number): Promise<boolean> => {
+  const result = await database()
+    .delete(tables.projects)
+    .where(eq(tables.projects.id, id));
+  return (result.rowCount ?? 0) > 0;
 };

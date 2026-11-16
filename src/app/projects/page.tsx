@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Suspense } from "react";
 
 import Pagination from "@/components/pagination";
@@ -5,14 +6,17 @@ import ProjectList from "@/components/project-list";
 import { ProjectSearch } from "@/components/project-search";
 import type { ProjectResponse } from "@/types/project.type";
 import { getBaseUrl } from "@/utils/base-url.util";
-import { PROJECT_LIMITS, projectSchema } from "@/validations/project.validate";
+import {
+  PROJECT_LIMITS,
+  projectQuerySchema,
+} from "@/validations/project.validate";
 
 interface PageProps {
   searchParams: Promise<{ page?: string; query?: string; limit?: string }>;
 }
 
 const ListProjects = async ({ searchParams }: PageProps) => {
-  const validated = projectSchema.safeParse(await searchParams);
+  const validated = projectQuerySchema.safeParse(await searchParams);
 
   const endpointWithParams = new URL(`${await getBaseUrl()}/api/projects`);
 
@@ -47,7 +51,10 @@ const ListProjects = async ({ searchParams }: PageProps) => {
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <ProjectList projects={projects.data} />
+      <ProjectList
+        projects={projects.data}
+        actions={true}
+      />
       <Pagination
         perPage={PROJECT_LIMITS}
         previousPage={projects.previousPage}
@@ -62,7 +69,15 @@ const ListProjects = async ({ searchParams }: PageProps) => {
 export default async function ProjectPage({ searchParams }: PageProps) {
   return (
     <main className="mx-auto w-full max-w-7xl grow p-6">
-      <h1 className="mb-4 text-3xl font-bold">Projects Overview</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="mb-4 text-3xl font-bold">Projects Overview</h1>
+        <Link
+          className="bg-primary hover:bg-primary/80 text-secondary-foreground rounded px-4 py-2"
+          href="/projects/create"
+        >
+          Create Project
+        </Link>
+      </div>
       <ProjectSearch />
       <Suspense fallback={<div>Loading projects...</div>}>
         <ListProjects searchParams={searchParams} />
